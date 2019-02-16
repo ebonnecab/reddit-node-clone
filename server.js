@@ -7,9 +7,10 @@ app.engine('.handlebars', exphbs({
     extname: '.handlebars',                  // Set the file extension
     defaultLayout: 'main',            // Set a default template
 }))
+app.set("view engine", "handlebars");
 
 app.get('/', (req, res) => 
-res.send('Hello World!')
+res.render('home')
 )
 
 app.listen(port, () => 
