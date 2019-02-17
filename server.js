@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const app = express();
 const port = 3000;
+const Post = require("./models/post");
 
 
 
@@ -18,8 +19,13 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 
 //routes
-app.get('/', (req, res) => res.render('home')
-)
+app.get('/', (req, res) => {
+    Post.find({}).then(posts => {
+        res.render("posts-index", { posts });
+    }).catch(err => {
+        console.log(err.message)
+    })
+})
 
 app.get('/posts/new', function (req, res) {
     res.render('posts-new')
