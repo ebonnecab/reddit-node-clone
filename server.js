@@ -28,15 +28,9 @@ app.get('/posts/new', function (req, res) {
 // Post
 require('./controllers/posts')(app);
 
+// Database
+require('./data/reddit-db');
+
 app.listen(port, () => 
 console.log(`Example app listening on port ${port}!`))
 
-
-
-// mongoose.Promise = global.Promise;
-// mongoose.connect("mongodb://localhost/redditclone", { useMongoClient: true });
-// mongoose.connection.on(
-//   "error",
-//   console.error.bind(console, "MongoDB connection Error:")
-// );
-// mongoose.set("debug", true);
