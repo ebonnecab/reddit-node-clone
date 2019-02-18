@@ -1,7 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 const app = express();
 const port = 3000;
 const Post = require("./models/post");
@@ -17,6 +20,7 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(cookieParser());
 
 //routes
 app.get('/', (req, res) => {
