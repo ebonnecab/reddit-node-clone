@@ -40,6 +40,9 @@ require('./data/reddit-db');
 // Comment
 require('./controllers/comments.js')(app);
 
+//Auth
+require("./controllers/auth.js")(app);
+
 app.listen(port, () => 
 console.log(`Example app listening on port ${port}!`))
 
