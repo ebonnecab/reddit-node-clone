@@ -25,5 +25,10 @@ module.exports = app => {
         return res.status(400).send({ err: err.message });
       });
   });
+
+  app.get('/logout', (req, res) => {
+    res.clearCookie('nToken');
+    res.redirect('/');
+  });
 }
 
