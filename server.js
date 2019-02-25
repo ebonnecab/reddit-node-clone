@@ -23,17 +23,6 @@ app.use(expressValidator());
 app.use(cookieParser());
 
 //routes
-app.get('/', (req, res) => {
-    Post.find({}).then(posts => {
-        res.render("posts-index", { posts });
-    }).catch(err => {
-        console.log(err.message)
-    })
-})
-
-app.get('/posts/new', function (req, res) {
-    res.render('posts-new')
-})
 
 // Post
 require('./controllers/posts')(app);
@@ -51,3 +40,17 @@ app.listen(port, () =>
 console.log(`Example app listening on port ${port}!`))
 
 module.exports = app;
+
+var checkAuth = (req, res, next) => {
+    console.log("Checking authentication");
+    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+        req.user = null;
+    } else {
+        var token = req.cookies.nToken;
+        var decodedToken = jwt.decode(token, { complete: true }) || {};
+        req.user = decodedToken.payload;
+    }
+
+    next();
+};
+app.use(checkAuth);
